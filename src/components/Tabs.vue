@@ -19,7 +19,7 @@
     @Prop(String)
     readonly value!: string;
     @Prop(String)
-    classPrefix?: string;
+    classPrefix?: string;//前缀
     @Prop({type: String, default: '64px'})
     height!: string;
 

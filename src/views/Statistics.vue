@@ -58,9 +58,10 @@
       const {recordList} = this;
       if (recordList.length === 0) {return [];}
 
-      const newList = clone(recordList)
-        .filter(r => r.type === this.type)
-        .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+      const newList = clone(recordList)//进行深克隆再使用，避免直接修改源数据
+        .filter(r => r.type === this.type)//区分支出和收入，只选type和我们当前选中一致的数据
+        .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());//字符串无法表示>=<三种情况，所以需要使用dayjs把字符串变成数字
+      //先排序再放到数组，防止后续有选择时间功能导致数组插入乱序
       type Result = { title: string, total?: number, items: RecordItem[] }[]
       const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
       for (let i = 1; i < newList.length; i++) {
@@ -77,7 +78,7 @@
           console.log(sum);
           console.log(item);
           return sum + item.amount;
-        }, 0);
+        }, 0);//初始值=0
       });
       return result;
     }
@@ -94,12 +95,9 @@
 <style scoped lang="scss">
   ::v-deep {
     .type-tabs-item {
-      background: #C4C4C4;
+      background: #fde3cc;
       &.selected {
-        background: white;
-        &::after {
-          display: none;
-        }
+        background: #ffb13d;
       }
     }
     .interval-tabs-item {

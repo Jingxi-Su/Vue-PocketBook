@@ -22,7 +22,7 @@
   import FormItem from '@/components/Money/FormItem.vue';
   import Button from '@/components/Button.vue';
 
-  @Component({
+  @Component({//修饰器的作用：type会自动被处理成data，selectType会自动被处理成methods
     components: {Button, FormItem},
   })
   export default class EditLabel extends Vue {

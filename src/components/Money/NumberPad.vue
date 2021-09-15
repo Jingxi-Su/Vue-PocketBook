@@ -31,19 +31,19 @@ export default class NumberPad extends Vue {
 
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
-    const input = button.textContent!;
+    const input = button.textContent!;//！相当于as string，即把null排除
     if (this.output.length === 16) {
       return;
     }
     if (this.output === '0') {
-      if ('0123456789'.indexOf(input) >= 0) {
+      if ('0123456789'.indexOf(input) >= 0) {//如果输入的东西在0123456789中
         this.output = input;
       } else {
         this.output += input;
       }
       return;
     }
-    if (this.output.indexOf('.') >= 0 && input === '.') {
+    if (this.output.indexOf('.') >= 0 && input === '.') {//防止一串数字中出现两个小数点
       return;
     }
     this.output += input;
@@ -62,10 +62,10 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    const number = parseFloat(this.output);
+    const number = parseFloat(this.output);//将字符串改成数字
     this.$emit('update:value', number);
     this.$emit('submit', number);
-    this.output = '0';
+    this.output = '0';//提交后清空
   }
 }
 </script>

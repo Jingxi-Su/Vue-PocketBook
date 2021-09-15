@@ -3,6 +3,8 @@
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type"/>
+    <!--    如果想给一个组件初始值，然后在更新时拿到最新的值，就使用.sync-->
+    <!--    <Types :value="record.type" @update:value="onUpdateType"/>-->
     <div class="notes">
       <FormItem field-name="备注"
                 placeholder="在这里输入备注"
@@ -27,7 +29,7 @@
   })
   export default class Money extends Vue {
     get recordList() {
-      return this.$store.state.recordList;
+      return this.$store.state.recordList;//地址recordList复制到recordList
     }
 
     recordTypeList = recordTypeList;
@@ -36,7 +38,7 @@
       tags: [], notes: '', type: '-', amount: 0
     };
 
-    created() {
+    created() {//初始化
       this.$store.commit('fetchRecords');
     }
 

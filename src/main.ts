@@ -14,7 +14,13 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app');
+
+window.onload = function () {//直接滚动到页面底部
+    setTimeout(function () {
+        window.scrollTo(0, 10000);
+    }, 0);
+};

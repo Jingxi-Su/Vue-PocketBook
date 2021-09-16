@@ -40,7 +40,6 @@
     }
 
     update(name: string) {
-      console.log("执行了")
       if (this.currentTag) {
         this.$store.commit('updateTag', {
           id: this.currentTag.id, name
